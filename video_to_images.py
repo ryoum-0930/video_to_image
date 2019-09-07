@@ -36,7 +36,7 @@ def main():
         cap = movie_read(file)  # 動画ファイルを読み込む
         frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) # 総フレーム数を取得
         fps = cap.get(cv2.CAP_PROP_FPS) #FPSを取得
-        step = int(fps)*10  # fps*10 :約10秒
+        step = int(fps)*30  # fps*10 :約10秒
 
         img_dir = '{0}/{1}'.format(movie_path, file)
         # フォルダが存在しない時に作成する
