@@ -1,0 +1,6 @@
+*.webm
+*.mp4
+movies/test/
+MyNote_git/
+test_tqdm.py
+__pycache__/
