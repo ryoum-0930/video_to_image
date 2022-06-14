@@ -1,6 +1,8 @@
 import os
+from tkinter.tix import Tree
 import cv2
 from tqdm import tqdm
+import sys
 
 movie_name = ''   # 動画のファイル名
 mp4_files = []  # mp4のファイルをリストで取得
@@ -28,16 +30,20 @@ def movie_read(file):
         exit(-1)
     return cap
 
-def main():
+def main(frame_only,sec):
     count = 0
-    # while(True):
+    
     get_fileName()
     for file in mp4_files:
         cap = movie_read(file)  # 動画ファイルを読み込む
         frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) # 総フレーム数を取得
         fps = cap.get(cv2.CAP_PROP_FPS) #FPSを取得
-        step = int(fps)*30  # fps*10 :約10秒
-
+        # print(fps) :30
+        if not frame_only:
+            step = int(fps*sec)  # fps*10 :約10秒
+        else:   # フレーム単位で取り出す
+            step = 1
+        
         img_dir = '{0}/{1}'.format(movie_path, file)
         # フォルダが存在しない時に作成する
         if not(os.path.exists(img_dir)): # フォルダが無い時
@@ -59,6 +65,13 @@ def main():
 
 if __name__ == "__main__":
     # print(movie_name)
-    main()
+    if len(sys.argv)<1:
+        sec = 10
+    else:
+        sec = sys.argv[1]
+    print(f"{sec}秒でスライスします．")
+    
+    frame_only = True
+    main(frame_only,sec)
     print("------------")
-    print("video to img Complete !\n")
+    print("Complete video to img  !\n")
