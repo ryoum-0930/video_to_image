@@ -6,7 +6,7 @@ import sys
 
 movie_name = ''   # 動画のファイル名
 mp4_files = []  # mp4のファイルをリストで取得
-movie_path = './movies'
+movie_path = '../Infrared_BearMovie/ok/'
 
 def get_fileName():
     Mfiles = os.listdir('{0}/'.format(movie_path)) #Mfilesにpath内のすべてのフォルダを挿入
@@ -65,13 +65,13 @@ def main(frame_only,sec):
 
 if __name__ == "__main__":
     # print(movie_name)
-    if len(sys.argv)<1:
+    if len(sys.argv) < 2:
         sec = 10
     else:
-        sec = sys.argv[1]
+        sec = float(sys.argv[1])
     print(f"{sec}秒でスライスします．")
     
-    frame_only = True
+    frame_only = False
     main(frame_only,sec)
     print("------------")
     print("Complete video to img  !\n")
